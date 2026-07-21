@@ -102,6 +102,39 @@ nav {
     color: #000;
 }
 
+/* Music Toggle Button */
+.btn-music {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border);
+    transition: all 0.3s ease;
+}
+
+.btn-music:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
+}
+
+.btn-music.playing {
+    background: var(--gold);
+    color: #000;
+    box-shadow: 0 0 15px rgba(255, 184, 0, 0.4);
+    animation: pulse-music 2s infinite;
+}
+
+@keyframes pulse-music {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.08); }
+    100% { transform: scale(1); }
+}
+
 /* Hero Section with 3D Canvas */
 .hero {
     position: relative;
