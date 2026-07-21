@@ -96,3 +96,41 @@ function sendWhatsAppOrder() {
     const whatsappUrl = `https://wa.me/96871733223?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
 }
+
+// ==========================================================================
+// 3. BACKGROUND MUSIC CONTROLLER
+// ==========================================================================
+const bgMusic = document.getElementById('bg-music');
+const musicBtn = document.getElementById('music-btn');
+let isPlaying = false;
+
+// ضبط الصوت ليكون هادئاً جداً في الخلفية
+bgMusic.volume = 0.25;
+
+function toggleMusic() {
+    if (isPlaying) {
+        bgMusic.pause();
+        musicBtn.classList.remove('playing');
+        musicBtn.innerHTML = '<i class="fa-solid fa-music"></i>';
+        isPlaying = false;
+    } else {
+        bgMusic.play().then(() => {
+            musicBtn.classList.add('playing');
+            musicBtn.innerHTML = '<i class="fa-solid fa-volume-high"></i>';
+            isPlaying = true;
+        }).catch(error => {
+            console.log("تفاعل المستخدم مطلوب أولاً:", error);
+        });
+    }
+}
+
+// تشغيل الصوت تلقائياً مع أول ضغطة للمستخدم في الشاشة
+document.addEventListener('click', function autoPlayMusicOnInteraction() {
+    if (!isPlaying) {
+        bgMusic.play().then(() => {
+            musicBtn.classList.add('playing');
+            musicBtn.innerHTML = '<i class="fa-solid fa-volume-high"></i>';
+            isPlaying = true;
+        }).catch(() => {});
+    }
+}, { once: true });
